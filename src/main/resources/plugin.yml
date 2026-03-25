@@ -1,0 +1,24 @@
+name: TopperRest
+version: '${project.version}'
+main: gg.gianluca.topperrest.TopperRest
+api-version: '1.21'
+description: REST API addon for the Topper leaderboard plugin
+authors: [ gianluca ]
+website: https://gianluca.gg
+
+depend:
+  - Topper
+
+softdepend:
+  - floodgate
+
+commands:
+  topperrest:
+    description: TopperRest command
+    usage: /topperrest <reload>
+    permission: topperrest.admin
+
+permissions:
+  topperrest.admin:
+    description: Allows use of TopperRest admin commands
+    default: op

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>gg.gianluca</groupId>
+    <artifactId>TopperRest</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>TopperRest</name>
+    <description>REST API addon for the Topper leaderboard plugin</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <topper.spigot.version>4.6.0</topper.spigot.version>
+        <topper.version>4.19.1</topper.version>
+        <minelib.version>1.3.0</minelib.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>opencollab-repo</id>
+            <url>https://repo.opencollab.dev/main/</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Paper API 1.21.1 -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Topper Spigot Plugin (TopperPlugin, SpigotTopTemplate, GenericEntryUpdateEvent) -->
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-spigot-plugin</artifactId>
+            <version>${topper.spigot.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Topper Framework: top-player-number template (NumberTopHolder, TopManager, etc.) -->
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-template-top-player-number</artifactId>
+            <version>${topper.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- MineLib Plugin Base (BasePlugin.get() used by TopperPlugin) -->
+        <dependency>
+            <groupId>io.github.projectunified</groupId>
+            <artifactId>minelib-plugin-base</artifactId>
+            <version>${minelib.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Floodgate API (Bedrock player support, optional at runtime) -->
+        <dependency>
+            <groupId>org.geysermc.floodgate</groupId>
+            <artifactId>api</artifactId>
+            <version>2.2.4-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Gson (bundled with Paper) -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <filtering>true</filtering>
+                </configuration>
+            </plugin>
+
+            <!-- No shade needed: all deps are provided; plugin JAR is thin -->
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
